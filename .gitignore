@@ -4,6 +4,6 @@ node_modules/
 build/
 tmp/
 temp/
-/dist
+dist/
 
-ormconfig.json
+ormconfig.json/
