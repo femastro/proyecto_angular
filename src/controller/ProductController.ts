@@ -1,6 +1,7 @@
 import { getRepository } from 'typeorm';
 import { Request, Response } from 'express';
 import { Product } from '../entity/Product';
+import { Stock } from '../entity/Stock';
 
 export class ProductController {
   static getAll = async (req: Request, res: Response) => {
@@ -31,81 +32,83 @@ export class ProductController {
     }
   };
 
-  // static new = async (req: Request, res: Response) => {
-  //   const { username, password, role } = req.body;
-  //   const user = new Product();
+  static new = async (req: Request, res: Response) => {
+    const { codArticulo, marca, modelo, medida, codProveedor, cantidad } = req.body;
+    const prod = new Product();
 
-  //   // user.username = username;
-  //   // user.password = password;
-  //   // user.role = role;
+    prod.codArticulo = codArticulo;
+    prod.marca = marca;
+    prod.modelo = modelo;
+    prod.medida = medida;
+    prod.codProveedor = codProveedor;
 
-  //   // Validate
-  //   const validationOpt = { validationError: { target: false, value: false } };
-  //   const errors = await validate(user, validationOpt);
-  //   if (errors.length > 0) {
-  //     return res.status(400).json(errors);
-  //   }
+    const userRepository = getRepository(Product);
 
-  //   // TODO: HASH PASSWORD
+    try {
+      await userRepository.save(prod);
+    } catch (e) {
+      return res.status(409).json({ message: 'Article already exist' });
+    }
 
-  //   const userRepository = getRepository(Product);
-  //   try {
-  //     user.hashPassword();
-  //     await userRepository.save(user);
-  //   } catch (e) {
-  //     return res.status(409).json({ message: 'Username already exist' });
-  //   }
-  //   // All ok
-  //   //res.send('User created');  this line change by line 61.
-  //   res.status(201).json({ message : 'User Created !'});
-  // };
+    const stock = new Stock();
+    stock.codArticulo = codArticulo;
+    stock.stock = cantidad;
 
-  // static edit = async (req: Request, res: Response) => {
-  //   let user;
-  //   const { id } = req.params;
-  //   const { username, role } = req.body;
+    const userRepositoryStock = getRepository(Stock);
 
-  //   const userRepository = getRepository(Product);
-  //   // Try get user
-  //   try {
-  //     user = await userRepository.findOneOrFail(id);
-  //     user.username = username;
-  //     user.role = role;
-  //   } catch (e) {
-  //     return res.status(404).json({ message: 'User not found' });
-  //   }
-  //   const validationOpt = { validationError: { target: false, value: false } };
-  //   const errors = await validate(user, validationOpt);
+    try {
+      await userRepositoryStock.save(stock);
+    } catch (e) {
+      return res.status(409).json({ message: 'Article already exist' });
+    }
 
-  //   if (errors.length > 0) {
-  //     return res.status(400).json(errors);
-  //   }
+    res.status(201).json({ message : 'Article Created !'});
+  };
 
-  //   // Try to save user
-  //   try {
-  //     await userRepository.save(user);
-  //   } catch (e) {
-  //     return res.status(409).json({ message: 'Username already in use' });
-  //   }
+  static edit = async (req: Request, res: Response) => {
+    let prod;
+    const { id } = req.params;
+    const { codArticulo, marca, modelo, medida, codProveedor } = req.body;
 
-  //   res.status(201).json({ message: 'User update !' });
-  // };
+    const userRepository = getRepository(Product);
+    // Try get Prod
+    try {
+        prod = await userRepository.findOneOrFail(id);
+        prod.codArticulo = codArticulo;
+        prod.marca = marca;
+        prod.modelo = modelo;
+        prod.medida = medida;
+        prod.codProveedor = codProveedor;
 
-  // static delete = async (req: Request, res: Response) => {
-  //   const { id } = req.params;
-  //   const userRepository = getRepository(Product);
-  //   let user: Product;
+    } catch (e) {
+      return res.status(404).json({ message: 'Article not found' });
+    }
 
-  //   try {
-  //     user = await userRepository.findOneOrFail(id);
-  //   } catch (e) {
-  //     return res.status(404).json({ message: 'User not found' });
-  //   }
+    // Try to save Prod
+    try {
+      await userRepository.save(prod);
+    } catch (e) {
+      return res.status(409).json({ message: 'Article already in use' });
+    }
 
-  //   // Remove user
-  //   userRepository.delete(id);
-  //   res.status(201).json({ message: ' User deleted' });
-  // };
+    res.status(201).json({ message: 'Article update !' });
+  };
+
+  static delete = async (req: Request, res: Response) => {
+     const { id } = req.params;
+     const userRepository = getRepository(Product);
+     let prod: Product;
+
+     try {
+       prod = await userRepository.findOneOrFail(id);
+     } catch (e) {
+       return res.status(404).json({ message: 'Article not found' });
+     }
+
+    // Remove Prod
+    userRepository.delete(id);
+    res.status(201).json({ message: ' Article deleted' });
+  };
 }
 
 export default ProductController;

@@ -12,13 +12,13 @@ router.get('/', ProductController.getAll);
 // Get one user
 router.get('/:id', /*[checkJwt, checkRole(['admin'])],*/ ProductController.getById);
 
-// // Create a new user
-// router.post('/', [checkJwt, checkRole(['admin'])], ProductController.new);
+// Create a new user
+router.post('/', /*[checkJwt, checkRole(['admin'])],*/ ProductController.new);
 
-// // Edit user
-// router.patch('/:id', [checkJwt, checkRole(['admin'])], ProductController.edit);
+// Edit user
+router.patch('/:id', /*[checkJwt, checkRole(['admin'])],*/ ProductController.edit);
 
-// // Delete
-// router.delete('/:id', [checkJwt, checkRole(['admin'])], ProductController.delete);
+// Delete
+router.delete('/:id', /*[checkJwt, checkRole(['admin'])],*/ ProductController.delete);
 
 export default router;
