@@ -1,3 +1,4 @@
+import { StockService } from './../services/stock.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StockComponent implements OnInit {
 
-  constructor() { }
+  prods = []
+
+  constructor(private stockSvc: StockService) { }
 
   ngOnInit(): void {
+    this.stockSvc.onStock().subscribe((res) => {
+      this.prods = res;
+    });
   }
 
 }

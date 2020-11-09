@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <a class="navbar-brand" href="#">Navbar</a>
+    <a class="navbar-brand" href="#">Gestion</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -7,22 +7,27 @@
     <div class="collapse navbar-collapse" id="navbarColor01">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="#" [routerLink]="['/home']" routerLinkActive="router-link-active">
+          <a class="nav-link" href="#" routerLink="/home" routerLinkActive="router-link-active">
             Home
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#" [routerLink]="['/stock']" routerLinkActive="router-link-active">
+          <a *ngIf="isLogged" class="nav-link" href="#" routerLink="/stock" routerLinkActive="router-link-active">
             Stock
           </a>
         </li>
       </ul>
       <ul class="navbar-nav mr-right">
         <li class="nav-item active">
-          <a class="nav-link" href="#" [routerLink]="['/login']" routerLinkActive="router-link-active">
-            Login
+          <a *ngIf="isLogged; else login" class="nav-link" href="#" (click)="onLogout()" routerLinkActive="router-link-active">
+            Logout
           </a>
         </li>
       </ul>
     </div>
   </nav>
+  <ng-template #login >
+    <a class="nav-link" href="#" routerLink="/login" routerLinkActive="router-link-active">
+      Login
+    </a>
+  </ng-template>

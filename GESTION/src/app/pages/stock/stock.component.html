@@ -1,1 +1,56 @@
-<p>stock works!</p>
+<div>
+    <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">
+                <select class="form-control" name="" id="">
+                    <option value="0">Productos</option>
+                    <option value="N">Neumaticos</option>
+                    <option value="L">LLantas</option>
+                </select>
+            </th>
+            <th scope="col">
+                <select class="form-control" name="" id="">
+                    <option *ngFor="let prod of prods" value="{{ prod.marca  }}">{{ prod.marca }}</option>
+                </select>
+            </th>
+            <th scope="col">
+                <select class="form-control" name="" id="">
+                    <option *ngFor="let prod of prods" value="{{ prod.modelo  }}">{{ prod.modelo }}</option>
+                </select>
+            </th>
+            <th scope="col">
+                <select class="form-control" name="" id="">
+                    <option *ngFor="let prod of prods" value="{{ prod.medida  }}">{{ prod.medida }}</option>
+                </select>
+            </th>
+          </tr>
+        </thead>
+    </table>
+</div>
+
+<table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">No.</th>
+        <th scope="col">Codigo</th>
+        <th scope="col">Marca</th>
+        <th scope="col">Modelo</th>
+        <th scope="col">Medida</th>
+        <th scope="col">Stock</th>
+        <th colspan="2" scope="col" class="text-center"><a href="#">Nuevo</a></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let prod of prods" class="table-active">
+        <td>{{ prod.id }}</td>
+        <td>{{ prod.codArticulo }}</td>
+        <td>{{ prod.marca }}</td>
+        <td>{{ prod.modelo }}</td>
+        <td>{{ prod.medida }}</td>
+        <td>{{ prod.stock }}</td>
+        <td class="text-center"><a href="#">Editar</a></td>
+        <td class="text-center"><a href="#">Eliminar</a></td>
+      </tr>
+    </tbody>
+</table>

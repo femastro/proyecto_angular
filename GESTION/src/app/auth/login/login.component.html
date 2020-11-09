@@ -1,1 +1,18 @@
-<p>login works!</p>
+<div class="login mt-5">
+    <form [formGroup]="formLogin" (ngSubmit)="onLogin()">
+        <fieldset>
+          <legend class="text-center"><h3>Login</h3></legend>
+          <div class="form-group">
+            <label for="InputUser">User Name</label>
+            <input type="text" class="form-control" formControlName="username" placeholder="Enter User">
+          </div>
+          <div class="form-group">
+            <label for="InputPassword">Password</label>
+            <input type="password" class="form-control" formControlName="password" placeholder="Password">
+          </div>
+          <div>
+            <button type="submit" class="btn btn-primary btn-block">Login</button>
+          </div>
+        </fieldset>
+    </form>
+</div>
