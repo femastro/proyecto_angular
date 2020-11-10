@@ -1,7 +1,6 @@
 import { getRepository } from 'typeorm';
 import { Request, Response } from 'express';
 import { Product } from '../entity/Product';
-import { Stock } from '../entity/Stock';
 
 export class ProductController {
   static getAll = async (req: Request, res: Response) => {
@@ -33,13 +32,14 @@ export class ProductController {
   };
 
   static new = async (req: Request, res: Response) => {
-    const { codArticulo, marca, modelo, medida, codProveedor, cantidad } = req.body;
+    const { codArticulo, marca, modelo, medida, stock, codProveedor } = req.body;
     const prod = new Product();
 
     prod.codArticulo = codArticulo;
     prod.marca = marca;
     prod.modelo = modelo;
     prod.medida = medida;
+    prod.stock = stock;
     prod.codProveedor = codProveedor;
 
     const userRepository = getRepository(Product);
@@ -50,19 +50,7 @@ export class ProductController {
       return res.status(409).json({ message: 'Article already exist' });
     }
 
-    const stock = new Stock();
-    stock.codArticulo = codArticulo;
-    stock.stock = cantidad;
-
-    const userRepositoryStock = getRepository(Stock);
-
-    try {
-      await userRepositoryStock.save(stock);
-    } catch (e) {
-      return res.status(409).json({ message: 'Article already exist' });
-    }
-
-    res.status(201).json({ message : 'Article Created !'});
+    res.json({ message : 'Article Created !'});
   };
 
   static edit = async (req: Request, res: Response) => {

@@ -27,9 +27,13 @@ export class AuthService {
       .post<UserResponse>(`${environment.API_URL}/auth/login`, authData)
       .pipe(
         map((user: UserResponse) => {
-          this.saveLocalStorage(user);
-          this.user.next(user);
-          return user;
+          if( user.message == "OK" ){
+            this.saveLocalStorage(user);
+            this.user.next(user);
+            return user;
+          }else{
+            window.alert(user.message);
+          }
         }),
         catchError((err) => this.handlerError(err))
       );
