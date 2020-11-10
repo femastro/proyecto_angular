@@ -28,7 +28,7 @@ class AuthController {
     
     // Check password
     // if (!user.checkPassword(password)) {
-        return res.status(400).json({ message: 'Username or Password are incorrect!' });
+        return res.json({ message: 'Username or Password are incorrect!' });
     }
 
     const token = jwt.sign({ userId: user.id, username: user.username }, config.jwtSecret, { expiresIn: '1h' });
