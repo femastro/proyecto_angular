@@ -4,7 +4,9 @@ import { environment } from 'src/environments/environment';
 import { UserResponse, Users } from '../shared/interfaces/user.interface';
 import { catchError, map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
+const helper = new JwtHelperService();
 @Injectable({
   providedIn: 'root'
 })
@@ -12,7 +14,27 @@ export class AuthService {
 
   private user = new BehaviorSubject<UserResponse>(null);
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    
+    this.checkToken();
+
+   }
+
+  private checkToken(): void {
+    
+    const user = JSON.parse(localStorage.getItem('user')) || null;
+
+    if (user) {
+      const isExpired = helper.isTokenExpired(user.token);
+
+      if (isExpired) {
+        this.logout();
+      } else {
+        this.user.next(user);
+      }
+ 
+    }
+  }
 
   get user$(): Observable<UserResponse> {
     return this.user.asObservable();

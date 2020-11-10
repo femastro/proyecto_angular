@@ -25,7 +25,6 @@ export class LoginComponent implements OnInit {
 
   onLogin(){
     const authData = this.formLogin.value;
-    console.log("User ->", authData);
     this.authSvc.login(authData).subscribe((res) => {
       if (res) {
         this.router.navigate(['/']);

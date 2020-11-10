@@ -27,6 +27,7 @@ export class NavbarComponent implements OnInit {
       .pipe(takeUntil(this.destroy$))
       .subscribe((user: UserResponse) => {
         this.isAdmin = user?.role;
+        console.log(this.isAdmin);
         this.isLogged = this.isAdmin?true : false;
       });
   }

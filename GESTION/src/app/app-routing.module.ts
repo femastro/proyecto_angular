@@ -14,7 +14,8 @@ const routes: Routes = [
       },
       { path: 'home', loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule) }, 
       { path: 'stock', loadChildren: () => import('./pages/stock/stock.module').then(m => m.StockModule) }, 
-      { path: 'login', loadChildren: () => import('./auth/login/login.module').then(m => m.LoginModule) }
+      { path: 'login', loadChildren: () => import('./auth/login/login.module').then(m => m.LoginModule) },
+      { path: 'admin', loadChildren: () => import('./auth/admin/admin.module').then(m => m.AdminModule) },
     ]
   },
 ];

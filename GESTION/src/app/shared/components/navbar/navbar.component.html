@@ -19,6 +19,9 @@
       </ul>
       <ul class="navbar-nav mr-right">
         <li class="nav-item active">
+          <a *ngIf="isAdmin === 'admin'" class="nav-link" href="#" routerLink="/admin">Admin</a>
+        </li>
+        <li class="nav-item active">
           <a *ngIf="isLogged; else login" class="nav-link" href="#" (click)="onLogout()" routerLinkActive="router-link-active">
             Logout
           </a>
