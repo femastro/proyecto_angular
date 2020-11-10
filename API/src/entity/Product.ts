@@ -19,6 +19,9 @@ export class Product {
     medida: string;
 
     @Column()
+    stock: number;
+
+    @Column()
     codProveedor: string;
 
 }

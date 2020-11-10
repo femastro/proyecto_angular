@@ -1,7 +1,6 @@
 import { getRepository } from 'typeorm';
 import { Request, Response } from 'express';
 import { Product } from '../entity/Product';
-import { Stock } from '../entity/Stock';
 
 export class ProductController {
   static getAll = async (req: Request, res: Response) => {
@@ -50,19 +49,7 @@ export class ProductController {
       return res.status(409).json({ message: 'Article already exist' });
     }
 
-    const stock = new Stock();
-    stock.codArticulo = codArticulo;
-    stock.stock = cantidad;
-
-    const userRepositoryStock = getRepository(Stock);
-
-    try {
-      await userRepositoryStock.save(stock);
-    } catch (e) {
-      return res.status(409).json({ message: 'Article already exist' });
-    }
-
-    res.status(201).json({ message : 'Article Created !'});
+    res.json({ message : 'Article Created !'});
   };
 
   static edit = async (req: Request, res: Response) => {

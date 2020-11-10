@@ -10,15 +10,14 @@ export class StockService {
 
   constructor(private http : HttpClient) { }
 
-  onStock(){
+  onProd(){
     return this.http
       .get<any>(`${environment.API_URL}/prod`)
       .pipe(
-        map((user) => {
-          return user;
+        map((res) => {
+          return res;
         })
       );
   }
-
 
 }
