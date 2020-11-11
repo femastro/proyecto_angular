@@ -25,7 +25,7 @@ class AuthController {
 
     // Check password
     if(user.password != password){
-    // if (!user.checkPassword(password)) {
+    //  if (!user.checkPassword(password)) {
         return res.json({ message: 'Username or Password are incorrect!' });
     }
 
