@@ -20,4 +20,23 @@ export class StockService {
       );
   }
 
+  chargeMarcas(){
+    return this.http
+      .get<any>(`${environment.API_URL}/marcas`)
+      .pipe(
+        map((res) => {
+          return res;
+        })
+      );
+  }
+  chargeModelos(){
+    return this.http
+      .get<any>(`${environment.API_URL}/modelos`)
+      .pipe(
+        map((res) => {
+          return res;
+        })
+      );
+  }
+
 }

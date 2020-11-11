@@ -9,6 +9,8 @@ import { Component, OnInit } from '@angular/core';
 export class StockComponent implements OnInit {
 
   prods = [];
+  marcas = [];
+  modelos = [];
 
   constructor(private stockSvc: StockService) { }
 
@@ -16,6 +18,14 @@ export class StockComponent implements OnInit {
 
     this.stockSvc.onProd().subscribe((res) => {
       this.prods = res;
+    });
+
+    this.stockSvc.chargeMarcas().subscribe((res) => {
+      this.marcas = res;
+    });
+
+    this.stockSvc.chargeModelos().subscribe((res) => {
+      this.modelos = res;
     });
 
   }

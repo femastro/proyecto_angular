@@ -3,6 +3,7 @@ import { Request, Response } from 'express';
 import { Product } from '../entity/Product';
 
 export class ProductController {
+  
   static getAll = async (req: Request, res: Response) => {
     const userRepository = getRepository(Product);
     let prod;
@@ -97,6 +98,7 @@ export class ProductController {
     userRepository.delete(id);
     res.status(201).json({ message: ' Article deleted' });
   };
+
 }
 
 export default ProductController;
