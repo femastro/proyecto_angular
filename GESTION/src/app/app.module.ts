@@ -7,7 +7,6 @@ import { ContainerComponent } from './shared/components/container/container.comp
 import { NavbarComponent } from './shared/components/navbar/navbar.component';
 import { HttpClientModule } from '@angular/common/http';
 
-
 @NgModule({
   declarations: [
     AppComponent,
