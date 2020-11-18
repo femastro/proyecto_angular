@@ -1,9 +1,9 @@
 export interface Prod {
-    id?: number;
+    id: number;
     codArticulo?: string;
-    marca?: string;
-    modelo?: string;
-    medida?: string;
-    stock?: number;
+    marca: string;
+    modelo: string;
+    medida: string;
+    stock: number;
     codProveedor?: string;
 }

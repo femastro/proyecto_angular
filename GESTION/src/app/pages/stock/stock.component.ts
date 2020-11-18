@@ -1,5 +1,7 @@
 import { StockService } from './../services/stock.service';
 import { Component, OnInit } from '@angular/core';
+import { Prod } from '../../shared/interfaces/prod.interface'
+import { Observable } from 'rxjs';
 @Component({
   selector: 'app-stock',
   templateUrl: './stock.component.html',
@@ -8,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
 
 export class StockComponent implements OnInit {
 
-  prods = [];
+  prods = new Observable<Prod>();
   marcas = [];
   modelos = [];
 
