@@ -1,5 +1,7 @@
 ormconfig.json
 
+db_heroku.txt
+
 .idea/
 .vscode/
 node_modules/
