@@ -12,6 +12,9 @@ router.get('/', ProductController.getAll);
 // Get one Prod
 router.get('/:id', /*[checkJwt, checkRole(['admin'])],*/ ProductController.getById);
 
+// Get one Prod
+router.get('/:marca', /*[checkJwt, checkRole(['admin'])],*/ ProductController.getByMarca);
+
 // Create a new Prod
 router.post('/', /*[checkJwt, checkRole(['admin'])],*/ ProductController.new);
 

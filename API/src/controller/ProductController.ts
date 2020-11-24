@@ -21,6 +21,17 @@ export class ProductController {
     }
   };
 
+  static getByMarca = async (req: Request, res: Response) => {
+    const { marca } = req.params;
+    const userRepository = getRepository(Product);
+    try {
+      const prod = await userRepository.findOne(marca)
+      res.send(prod);
+    } catch (e) {
+      res.status(404).json({ message: 'Not result' });
+    }
+  };
+
   static getById = async (req: Request, res: Response) => {
     const { id } = req.params;
     const userRepository = getRepository(Product);

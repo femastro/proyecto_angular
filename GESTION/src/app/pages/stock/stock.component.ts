@@ -1,7 +1,5 @@
 import { StockService } from './../services/stock.service';
 import { Component, OnInit } from '@angular/core';
-import { Prod } from '../../shared/interfaces/prod.interface'
-import { Observable } from 'rxjs';
 @Component({
   selector: 'app-stock',
   templateUrl: './stock.component.html',
@@ -10,7 +8,7 @@ import { Observable } from 'rxjs';
 
 export class StockComponent implements OnInit {
 
-  prods = new Observable<Prod>();
+  prods = [];
   marcas = [];
   modelos = [];
 
@@ -30,6 +28,13 @@ export class StockComponent implements OnInit {
       this.modelos = res;
     });
 
+  }
+
+  selectMarca(dato: string){
+    console.log("Dato -> ", dato);
+    this.stockSvc.searchMarca(dato).subscribe((res) => {
+      this.prods = res;
+    });
   }
 
 }

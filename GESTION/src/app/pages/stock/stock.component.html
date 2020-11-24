@@ -1,7 +1,7 @@
 <div class="row mt-3">
   <div class="col-sm-3">
-    <select class="form-control">
-      <option value="0">Marcas ...</option>
+    <select class="form-control" #opcion (change)="selectMarca(opcion.value)">
+      <option value="">Marcas ...</option>
       <option *ngFor="let marca of marcas" [ngValue]="marca.marca">{{marca.marca}}</option>
     </select>
   </div>
