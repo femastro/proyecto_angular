@@ -1,10 +1,10 @@
 {
    "type": "mysql",
-   "host": "us-cdbr-east-02.cleardb.com",
+   "host": "167.250.5.45",
    "port": 3306,
-   "username": "",
-   "password": "",
-   "database": "",
+   "username": "brown_fer",
+   "password": "Pirulo/!",
+   "database": "brown_comunidad",
    "synchronize": true,
    "logging": false,
    "entities": [
